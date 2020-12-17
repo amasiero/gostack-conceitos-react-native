@@ -21,11 +21,11 @@ export default function App() {
 
 	async function handleLikeRepository(id) {
 		const response = await api.post(`/repositories/${id}/like`);
-		const updatedRepository = response.data;
-		const newRepositories = repositories.map((repository) =>
-			repository.id === id ? updatedRepository : repository,
+		const likedRepository = response.data;
+		const updatedRepositories = repositories.map((repository) =>
+			repository.id === id ? likedRepository : repository,
 		);
-		setRepositories(newRepositories);
+		setRepositories(updatedRepositories);
 	}
 
 	function renderItem(repository) {
@@ -35,7 +35,7 @@ export default function App() {
 
 				<FlatList
 					style={styles.techsContainer}
-					data={repositories.techs}
+					data={repository.techs}
 					keyExtractor={(tech) => tech}
 					renderItem={({ item: tech }) => (
 						<Text style={styles.tech}>{tech}</Text>
